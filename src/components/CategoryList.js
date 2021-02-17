@@ -1,5 +1,6 @@
-import { ListWrapper } from "../styles";
+import { ListWrapper, Title } from "../styles";
 import CategoryItem from "./CategoryItem";
+import AddButton from "./buttons/AddButton";
 
 import SearchBar from "./SearchBar";
 import { useState } from "react";
@@ -17,7 +18,11 @@ const CategoryList = ({ categories }) => {
     .map((category) => <CategoryItem category={category} key={category.id} />);
   return (
     <div>
+      <AddButton />
+
       <SearchBar setQuery={setQuery} />
+      <Title>Categories</Title>
+
       {categoryList}
     </div>
   );

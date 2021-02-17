@@ -2,29 +2,29 @@ import { useState } from "react";
 import { SubmitButtonStyled, UpdateButtonStyled } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createCategory,
-  updateCategory,
-} from "../store/actions/categoryActions";
+  createIngredient,
+  updateIngredient,
+} from "../store/actions/ingredientActions";
 import { useHistory, useParams } from "react-router-dom";
 // import AddButton from "./buttons/AddButton";
 
-const CategoryForm = () => {
+const IngredientForm = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const { categorySlug, shopId } = useParams();
+  const { ingredientSlug, categoryId } = useParams();
 
-  const foundCategory = useSelector((state) =>
-    state.categoryReducer.categories.find(
-      (category) => category.slug === categorySlug
+  const foundIngredient = useSelector((state) =>
+    state.ingredientReducer.categories.find(
+      (ingredient) => ingredient.slug === ingredientSlug
     )
   );
 
-  const [category, setCategory] = useState(
-    foundCategory
-      ? foundCategory
+  const [ingredient, setIngredient] = useState(
+    foundIngredient
+      ? foundIngredient
       : {
-          // shopId: shopId,
+          // categoryId: categoryId,
           name: "",
           description: "",
           image: "",
@@ -32,15 +32,15 @@ const CategoryForm = () => {
   );
 
   const handleChnage = (event) => {
-    setCategory({ ...category, [event.target.name]: event.target.value });
+    setIngredient({ ...ingredient, [event.target.name]: event.target.value });
   };
 
   const handleImage = (event) => {
-    setCategory({ ...category, image: event.target.files[0] });
+    setIngredient({ ...ingredient, image: event.target.files[0] });
   };
 
   const restForm = () => {
-    setCategory({
+    setIngredient({
       name: "",
       description: "",
       image: "",
@@ -49,9 +49,9 @@ const CategoryForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if (foundCategory) dispatch(updateCategory(category));
+    // if (foundIngredient) dispatch(updateIngredient(ingredient));
     // else
-    dispatch(createCategory(category));
+    dispatch(createIngredient(ingredient));
     restForm();
     history.push("/categories");
   };
@@ -59,13 +59,13 @@ const CategoryForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>{foundCategory ? "Update" : "Create"} Category</h1>
+        <h1>{foundIngredient ? "Update" : "Create"} Ingredient</h1>
         <label>
           Name:
           <input
             type="text"
             name="name"
-            value={category.name}
+            value={ingredient.name}
             onChange={handleChnage}
           />
         </label>
@@ -74,7 +74,7 @@ const CategoryForm = () => {
           <input
             type="text"
             name="description"
-            value={category.description}
+            value={ingredient.description}
             onChange={handleChnage}
           />
         </label>
@@ -85,7 +85,7 @@ const CategoryForm = () => {
             type="file"
             name="image"
             alt=""
-            // value={category.image}
+            // value={ingredient.image}
             onChange={handleImage}
           />
         </label>
@@ -94,11 +94,11 @@ const CategoryForm = () => {
         </SubmitButtonStyled> */}
 
         <UpdateButtonStyled type="submit">
-          {foundCategory ? "Update" : "Create"} Category
+          {foundIngredient ? "Update" : "Create"} Ingredient
         </UpdateButtonStyled>
       </form>
     </div>
   );
 };
 
-export default CategoryForm;
+export default IngredientForm;

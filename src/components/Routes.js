@@ -4,8 +4,8 @@ import Home from "./Home";
 import CategoryList from "./CategoryList";
 // import CategoryDetail from "./CategoryDetail";
 import CategoryForm from "./CategoryForm";
-// import ShopList from "./ShopList";
-// import ShopDetail from "./ShopDetail";
+import IngredientList from "./IngredientList";
+import IngredientDetail from "./IngredientDetail";
 const Routes = () => {
   const categories = useSelector((state) => state.categoryReducer.categories);
 
@@ -20,12 +20,12 @@ const Routes = () => {
       <Route path="/categories">
         <CategoryList categories={categories} />
       </Route>
-      {/* <Route path="/shops/:shopSlug">
-        <ShopDetail />
+      <Route path="/ingredients/:ingredientSlug">
+        <IngredientDetail />
       </Route>
-      <Route path="/shops">
-        <ShopList />
-      </Route> */}
+      <Route path="/ingredients">
+        <IngredientList />
+      </Route>
       <Route exact path="/">
         <Home />
       </Route>
