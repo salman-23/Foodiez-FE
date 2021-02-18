@@ -16,21 +16,21 @@ export const fetchRecipes = () => {
   };
 };
 
-export const createRecipes = (newRecipes) => {
-  return async (dispatch) => {
-    try {
-      const formData = new FormData();
-      for (const key in newRecipes) formData.append(key, newRecipes[key]);
-      const res = await instance.post(
-        `/categories/${newRecipes.categoryId}/recipes`,
-        formData
-      );
-      dispatch({
-        type: CREATE_RECIPE,
-        payload: { newRecipes: res.data },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+// export const createRecipes = (newRecipes) => {
+//   return async (dispatch) => {
+//     try {
+//       const formData = new FormData();
+//       for (const key in newRecipes) formData.append(key, newRecipes[key]);
+//       const res = await instance.post(
+//         `/categories/${newRecipes.categoryId}/recipes`,
+//         formData
+//       );
+//       dispatch({
+//         type: CREATE_RECIPE,
+//         payload: { newRecipes: res.data },
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };

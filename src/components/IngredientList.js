@@ -16,15 +16,14 @@ const IngredientList = ({ categoryId }) => {
   // const loading = useSelector((state) => state.ingredients.loading);
   // if (loading) return <Loading />;
 
-  ///testing
   const ingredients = useSelector(
     (state) => state.ingredientReducer.ingredients
-    );
+  );
 
   const categorySlug = useParams().categorySlug;
-  const allIngredients = useSelector(
-    (state) => state.ingredientReducer.ingredients
-  );
+  // const allIngredients = useSelector(
+  //   (state) => state.ingredientReducer.ingredients
+  // );
 
   const category = useSelector((state) => {
     return state.categoryReducer.categories.find(
@@ -32,11 +31,8 @@ const IngredientList = ({ categoryId }) => {
     );
   });
 
-  // const ingredients = category.ingredients.map((ingredient) =>
-  //   allIngredients.find((_ingredient) => _ingredient.id === ingredient.id)
-  // );
-
-  const ingredientList = ingredients.filter((ingredient) => ingredient.categoryId === categoryId)
+  const ingredientList = ingredients
+    .filter((ingredient) => ingredient.categoryId === categoryId)
     .filter((ingredient) =>
       ingredient.name.toLowerCase().includes(query.toLowerCase())
     )
@@ -46,14 +42,12 @@ const IngredientList = ({ categoryId }) => {
 
   return (
     <div>
-   
       <Link to={`/categories/${categoryId}/ingredients/create`}>
         <AddButtonStyled>Add ingredient</AddButtonStyled>
       </Link>
       <Title>Ingredients</Title>
       <SearchBar setQuery={setQuery} />
       <ListWrapper>{ingredientList}</ListWrapper>
-  
     </div>
   );
 };
