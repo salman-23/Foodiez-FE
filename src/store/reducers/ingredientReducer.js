@@ -16,10 +16,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case CREATE_INEGREDIENT:
-      const { newCategory } = action.payload;
+      const { newIngredient } = action.payload;
       return {
         ...state,
-        ingredients: [...state.ingredients, newCategory],
+        ingredients: [...state.ingredients, newIngredient],
       };
     default:
       return state;

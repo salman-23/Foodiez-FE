@@ -9,8 +9,8 @@ import Loading from "./Loading";
 
 const CategoryList = ({ categories }) => {
   const [query, setQuery] = useState("");
-  // const loading = useSelector((state) => state.loading);
-  // if (loading) return <Loading />;
+  const loading = useSelector((state) => state.loading);
+  if (loading) return <Loading />;
   const categoryList = categories
     .filter((category) =>
       category.name.toLowerCase().includes(query.toLowerCase())
@@ -22,8 +22,7 @@ const CategoryList = ({ categories }) => {
 
       <SearchBar setQuery={setQuery} />
       <Title>Categories</Title>
-
-      {categoryList}
+      <ListWrapper>{categoryList}</ListWrapper>
     </div>
   );
 };

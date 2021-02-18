@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-// Components
-import DeleteButton from "./buttons/DeleteButton";
-import UpdateButton from "./buttons/UpdateButton";
+
 // Styling
 import { IngredientWrapper } from "../styles";
 
@@ -18,11 +16,12 @@ const IngredientItem = (props) => {
         <img alt={ingredient.name} src={ingredient.image} />
       </Link>
       <p>{ingredient.name}</p>
-      <DeleteButton
+      {/* <p>{ingredient.description}</p> */}
+      {/* <DeleteButton
         ingredientId={ingredient.id}
         deleteIngredient={props.deleteIngredient}
       />
-      <UpdateButton ingredientSlug={ingredient.slug}>Update</UpdateButton>
+      <UpdateButton ingredientSlug={ingredient.slug}>Update</UpdateButton> */}
     </IngredientWrapper>
   );
 };

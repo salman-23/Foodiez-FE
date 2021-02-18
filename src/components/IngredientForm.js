@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { SubmitButtonStyled, UpdateButtonStyled } from "../styles";
+import { AddButtonStyled, UpdateButtonStyled } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createIngredient,
   updateIngredient,
 } from "../store/actions/ingredientActions";
 import { useHistory, useParams } from "react-router-dom";
-// import AddButton from "./buttons/AddButton";
 
 const IngredientForm = () => {
   const history = useHistory();
@@ -14,22 +13,12 @@ const IngredientForm = () => {
   const dispatch = useDispatch();
   const { ingredientSlug, categoryId } = useParams();
 
-  const foundIngredient = useSelector((state) =>
-    state.ingredientReducer.categories.find(
-      (ingredient) => ingredient.slug === ingredientSlug
-    )
-  );
-
-  const [ingredient, setIngredient] = useState(
-    foundIngredient
-      ? foundIngredient
-      : {
-          // categoryId: categoryId,
-          name: "",
-          description: "",
-          image: "",
-        }
-  );
+  const [ingredient, setIngredient] = useState({
+    categoryId: categoryId,
+    name: "",
+    description: "",
+    image: "",
+  });
 
   const handleChnage = (event) => {
     setIngredient({ ...ingredient, [event.target.name]: event.target.value });
@@ -49,17 +38,16 @@ const IngredientForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if (foundIngredient) dispatch(updateIngredient(ingredient));
-    // else
+
     dispatch(createIngredient(ingredient));
     restForm();
-    history.push("/categories");
+    history.push("/ingredients");
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>{foundIngredient ? "Update" : "Create"} Ingredient</h1>
+        <h1>Create Ingredient</h1>
         <label>
           Name:
           <input
@@ -81,21 +69,10 @@ const IngredientForm = () => {
 
         <label>
           Image:
-          <input
-            type="file"
-            name="image"
-            alt=""
-            // value={ingredient.image}
-            onChange={handleImage}
-          />
+          <input type="file" name="image" alt="" onChange={handleImage} />
         </label>
-        {/* <SubmitButtonStyled type="submit" value="Submit">
-          Submit
-        </SubmitButtonStyled> */}
 
-        <UpdateButtonStyled type="submit">
-          {foundIngredient ? "Update" : "Create"} Ingredient
-        </UpdateButtonStyled>
+        <AddButtonStyled type="submit">Submit Add Ingredient</AddButtonStyled>
       </form>
     </div>
   );

@@ -1,35 +1,25 @@
 import { useState } from "react";
-import { SubmitButtonStyled, UpdateButtonStyled } from "../styles";
+import { AddButtonStyled, UpdateButtonStyled } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createCategory,
   updateCategory,
 } from "../store/actions/categoryActions";
 import { useHistory, useParams } from "react-router-dom";
-// import AddButton from "./buttons/AddButton";
+import AddButton from "./buttons/AddButton";
 
 const CategoryForm = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const { categorySlug, shopId } = useParams();
+  const { categorySlug, ingredientId } = useParams();
 
-  const foundCategory = useSelector((state) =>
-    state.categoryReducer.categories.find(
-      (category) => category.slug === categorySlug
-    )
-  );
-
-  const [category, setCategory] = useState(
-    foundCategory
-      ? foundCategory
-      : {
-          // shopId: shopId,
-          name: "",
-          description: "",
-          image: "",
-        }
-  );
+  const [category, setCategory] = useState({
+    ingredientId: ingredientId,
+    name: "",
+    description: "",
+    image: "",
+  });
 
   const handleChnage = (event) => {
     setCategory({ ...category, [event.target.name]: event.target.value });
@@ -49,8 +39,7 @@ const CategoryForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if (foundCategory) dispatch(updateCategory(category));
-    // else
+
     dispatch(createCategory(category));
     restForm();
     history.push("/categories");
@@ -59,7 +48,7 @@ const CategoryForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>{foundCategory ? "Update" : "Create"} Category</h1>
+        <h1>Create Category</h1>
         <label>
           Name:
           <input
@@ -81,21 +70,10 @@ const CategoryForm = () => {
 
         <label>
           Image:
-          <input
-            type="file"
-            name="image"
-            alt=""
-            // value={category.image}
-            onChange={handleImage}
-          />
+          <input type="file" name="image" alt="" onChange={handleImage} />
         </label>
-        {/* <SubmitButtonStyled type="submit" value="Submit">
-          Submit
-        </SubmitButtonStyled> */}
 
-        <UpdateButtonStyled type="submit">
-          {foundCategory ? "Update" : "Create"} Category
-        </UpdateButtonStyled>
+        <AddButtonStyled type="submit">Create Category</AddButtonStyled>
       </form>
     </div>
   );
