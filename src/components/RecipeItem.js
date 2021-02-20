@@ -16,7 +16,7 @@ const RecipeItem = (props) => {
         <img alt={recipe.name} src={recipe.image} />
       </Link>
       <p>{recipe.name}</p>
-      {/* <p>{recipe.description}</p> */}
+      <p>{recipe.description}</p>
     </RecipeWrapper>
   );
 };

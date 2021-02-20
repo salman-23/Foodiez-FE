@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   AddButtonStyled,
-  UpdateButtonStyled,
   FormStyled,
   LabelStyled,
   InputFieldStyled,
@@ -18,10 +17,11 @@ const IngredientForm = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const { categoryId } = useParams();
+  const { categoryId, recipeId } = useParams();
 
   const [ingredient, setIngredient] = useState({
     categoryId: categoryId,
+    recipeId: recipeId,
     name: "",
     description: "",
     image: "",
@@ -48,7 +48,7 @@ const IngredientForm = () => {
 
     dispatch(createIngredient(ingredient));
     restForm();
-    history.push("/categories");
+    history.push("/");
   };
 
   return (

@@ -6,15 +6,15 @@ import { Link } from "react-router-dom";
 import { AddButtonStyled } from "../styles";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import Loading from "./Loading";
+// import { useSelector } from "react-redux";
+// import Loading from "./Loading";
 
-const CategoryList = () => {
+const CategoryList = ({ categories }) => {
   const [query, setQuery] = useState("");
-  const categories = useSelector((state) => state.categoryReducer.categories);
-  const loading = useSelector((state) => state.ingredientReducer.loading);
 
-  if (loading) return <Loading />;
+  // const loading = useSelector((state) => state.ingredientReducer.loading);
+
+  // if (loading) return <Loading />;
 
   const categoryList = categories
     .filter((category) =>
@@ -26,7 +26,7 @@ const CategoryList = () => {
       <Title>Categories</Title>
       <SearchBar setQuery={setQuery} />
       <Link to="/categories/create">
-        <AddButtonStyled>Create</AddButtonStyled>
+        <AddButtonStyled>Create Category</AddButtonStyled>
       </Link>
       <ListWrapper>{categoryList}</ListWrapper>
     </div>

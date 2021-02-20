@@ -3,26 +3,25 @@ import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { DetailWrapper, AddButtonStyled } from "../styles";
 import IngredientList from "./IngredientList";
-import IngredientDetail from "./IngredientDetail";
 
 const CategoryDetail = () => {
   const { categorySlug } = useParams();
 
-  // const allIngredients = useSelector(
-  //   (state) => state.ingredientReducer.ingredients
-  // );
+  const allIngredients = useSelector(
+    (state) => state.ingredientReducer.ingredients
+  );
 
-  const category = useSelector((state) => {
-    return state.categoryReducer.categories.find(
+  const category = useSelector((state) =>
+    state.categoryReducer.categories.find(
       (_category) => _category.slug === categorySlug
-    );
-  });
-
-  // const ingredients = category.ingredients.map((ingredient) =>
-  //   allIngredients.find((_ingredient) => _ingredient.id === ingredient.id)
-  // );
+    )
+  );
 
   if (!category) return <Redirect to="/categories" />;
+
+  const ingredients = category.ingredients.map((ingredient) =>
+    allIngredients.find((_ingredient) => _ingredient.id === ingredient.id)
+  );
 
   return (
     <>
@@ -34,15 +33,12 @@ const CategoryDetail = () => {
         <h1>{category.name}</h1>
         <img src={category.image} alt={category.name} />
         <p>{category.description}</p>
-        <IngredientList
-          category={category}
-          categoryId={category.id}
-        ></IngredientList>
+        <IngredientList ingredients={ingredients} />
+
         <Link to={`/categories/${category.id}/ingredients/create`}>
           <AddButtonStyled>Add ingredient</AddButtonStyled>
         </Link>
       </DetailWrapper>
-      {/* <IngredientList ingredients={ingredients}></IngredientList> */}
     </>
   );
 };

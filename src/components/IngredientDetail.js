@@ -1,20 +1,29 @@
 import { useParams, Redirect, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
+import RecipeList from "../components/RecipeList";
+
 // Components
 
 // Styling
 import { DetailWrapper } from "../styles";
 
 const IngredientDetail = () => {
-  const ingredientSlug = useParams().ingredientSlug;
+  const { ingredientSlug } = useParams();
+
+  const allRecipes = useSelector((state) => state.recipeReducer.recipes);
 
   const ingredient = useSelector((state) =>
     state.ingredientReducer.ingredients.find(
-      (ingredient) => ingredient.slug === ingredientSlug
+      (_ingredient) => _ingredient.slug === ingredientSlug
     )
   );
-  if (!ingredient) return <Redirect to="/ingredient" />;
+
+  const recipes = ingredient.recipes.map((recipe) =>
+    allRecipes.find((_recipe) => _recipe.id === recipe.id)
+  );
+
+  if (!ingredient) return <Redirect to="/ingredients" />;
 
   return (
     <>
@@ -26,8 +35,6 @@ const IngredientDetail = () => {
         <h1>{ingredient.name}</h1>
         <img src={ingredient.image} alt={ingredient.name} />
       </DetailWrapper>
-
-      {/* <CategoryList categories={categories} /> */}
     </>
   );
 };

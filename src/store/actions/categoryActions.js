@@ -1,7 +1,4 @@
-import {
-  FETCH_CATEGORY,
-  CREATE_CATEGORY,
-} from "../actions/types";
+import { FETCH_CATEGORY, CREATE_CATEGORY } from "../actions/types";
 
 import instance from "./instance";
 
@@ -25,6 +22,8 @@ export const createCategory = (newCategory) => {
       const formData = new FormData();
       for (const key in newCategory) formData.append(key, newCategory[key]);
       const res = await instance.post(`/categories`, formData);
+      res.data.ingredients = [];
+      //
       dispatch({
         type: CREATE_CATEGORY,
         payload: { newCategory: res.data },

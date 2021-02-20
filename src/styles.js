@@ -46,9 +46,28 @@ export const Title = styled.h2`
 `;
 
 export const ListWrapper = styled.div`
+  display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const IngListWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ulSt = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  // align-items: center;
+  // justify-content: center;
+`;
+
+export const liSt = styled.li`
+  list-style: none;
+  flex: 0 0 33.333333%;
 `;
 
 export const CategoryWrapper = styled.div`
@@ -84,7 +103,7 @@ export const SearchBarStyled = styled.input`
   // display: block;
   // width: 40%;
   width: 100%;
-  border: 3px solid #00b4cc;
+  border: 3px solid #2d5631;
   border-right: none;
   padding: 5px;
   height: 20px;
@@ -92,7 +111,7 @@ export const SearchBarStyled = styled.input`
   outline: none;
   color: #9dbfaf;
   &:focus {
-    background: #00b4cc;
+    background: #2d5631;
   }
 `;
 
@@ -113,8 +132,8 @@ export const SearchContainer = styled.div`
 export const SearchButton = styled.button`
   width: 40px;
   height: 36px;
-  border: 1px solid #00b4cc;
-  background: #00b4cc;
+  border: 1px solid #2d5631;
+  background: #2d5631;
   text-align: center;
   color: #fff;
   border-radius: 0 5px 5px 0;

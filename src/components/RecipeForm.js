@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   AddButtonStyled,
-  UpdateButtonStyled,
   FormStyled,
   LabelStyled,
   InputFieldStyled,
@@ -10,7 +9,7 @@ import {
   FormAddButtonStyled,
 } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
-import { createRecipe, updateRecipe } from "../store/actions/recipeActions";
+import { createRecipe } from "../store/actions/recipeActions";
 import { useHistory, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -18,10 +17,10 @@ const RecipeForm = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const { recipeSlug, categoryId } = useParams();
+  const { recipeSlug, ingredientId } = useParams();
 
   const [recipe, setRecipe] = useState({
-    // categoryId: categoryId,
+    ingredientId: ingredientId,
     name: "",
     description: "",
     image: "",
@@ -90,7 +89,7 @@ const RecipeForm = () => {
                 />
               </LabelStyled>
 
-              <FormAddButtonStyled type="submit">
+              <FormAddButtonStyled onSubmit={handleSubmit}>
                 Submit Add Recipe
               </FormAddButtonStyled>
             </LegendStyled>

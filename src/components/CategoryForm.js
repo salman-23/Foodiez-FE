@@ -10,10 +10,7 @@ import {
   FormAddButtonStyled,
 } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createCategory,
-  updateCategory,
-} from "../store/actions/categoryActions";
+import { createCategory } from "../store/actions/categoryActions";
 import { useHistory, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -93,7 +90,7 @@ const CategoryForm = () => {
                 />
               </LabelStyled>
 
-              <FormAddButtonStyled type="submit">
+              <FormAddButtonStyled onSubmit={handleSubmit}>
                 Create Category
               </FormAddButtonStyled>
             </LegendStyled>

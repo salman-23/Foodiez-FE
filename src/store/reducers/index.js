@@ -4,9 +4,9 @@ import ingredientReducer from "./ingredientReducer";
 import recipeReducer from "./recipeReducer";
 
 const rootReducer = combineReducers({
-  categoryReducer,
-  ingredientReducer,
-  recipeReducer,
+  categoryReducer: categoryReducer,
+  ingredientReducer: ingredientReducer,
+  recipeReducer: recipeReducer,
 });
 
 export default rootReducer;
