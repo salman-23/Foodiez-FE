@@ -10,36 +10,33 @@ import {
   FormAddButtonStyled,
 } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createCategory,
-  updateCategory,
-} from "../store/actions/categoryActions";
+import { createRecipe, updateRecipe } from "../store/actions/recipeActions";
 import { useHistory, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-const CategoryForm = () => {
+const RecipeForm = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const { categorySlug, ingredientId } = useParams();
+  const { recipeSlug, categoryId } = useParams();
 
-  const [category, setCategory] = useState({
-    // ingredientId: ingredientId,
+  const [recipe, setRecipe] = useState({
+    // categoryId: categoryId,
     name: "",
     description: "",
     image: "",
   });
 
   const handleChnage = (event) => {
-    setCategory({ ...category, [event.target.name]: event.target.value });
+    setRecipe({ ...recipe, [event.target.name]: event.target.value });
   };
 
   const handleImage = (event) => {
-    setCategory({ ...category, image: event.target.files[0] });
+    setRecipe({ ...recipe, image: event.target.files[0] });
   };
 
   const restForm = () => {
-    setCategory({
+    setRecipe({
       name: "",
       description: "",
       image: "",
@@ -49,27 +46,27 @@ const CategoryForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    dispatch(createCategory(category));
+    dispatch(createRecipe(recipe));
     restForm();
-    history.push("/categories");
+    history.push("/recipes");
   };
 
   return (
     <>
       <Helmet>
-        <title>Create a Category</title>
+        <title>Create an Recipe</title>
       </Helmet>
       <FormStyled>
         <form onSubmit={handleSubmit}>
           <FieldSetStyled>
             <LegendStyled>
-              <h2>Create Category</h2>
+              <h2>Create Recipe</h2>
               <LabelStyled>
                 Name:
                 <InputFieldStyled
                   type="text"
                   name="name"
-                  value={category.name}
+                  value={recipe.name}
                   onChange={handleChnage}
                 />
               </LabelStyled>
@@ -78,7 +75,7 @@ const CategoryForm = () => {
                 <InputFieldStyled
                   type="text"
                   name="description"
-                  value={category.description}
+                  value={recipe.description}
                   onChange={handleChnage}
                 />
               </LabelStyled>
@@ -94,7 +91,7 @@ const CategoryForm = () => {
               </LabelStyled>
 
               <FormAddButtonStyled type="submit">
-                Create Category
+                Submit Add Recipe
               </FormAddButtonStyled>
             </LegendStyled>
           </FieldSetStyled>
@@ -104,4 +101,4 @@ const CategoryForm = () => {
   );
 };
 
-export default CategoryForm;
+export default RecipeForm;

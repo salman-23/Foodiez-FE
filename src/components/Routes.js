@@ -7,6 +7,9 @@ import CategoryForm from "./CategoryForm";
 import IngredientList from "./IngredientList";
 import IngredientDetail from "./IngredientDetail";
 import IngredientForm from "./IngredientForm";
+// import RecipeList from "./RecipeList";
+// import RecipeDetail from "./RecipeDetail";
+import RecipeForm from "./IngredientForm";
 const Routes = () => {
   const categories = useSelector((state) => state.categoryReducer.categories);
   return (
@@ -14,8 +17,11 @@ const Routes = () => {
       <Route path={"/categories/create"}>
         <CategoryForm />
       </Route>
-      <Route path={"/categories/:categoryId/ingredients/create"}>
+      {/* <Route path={"/categories/:categoryId/ingredients/create"}>
         <IngredientForm />
+      </Route> */}
+      <Route path={"/categories/:categoryId/ingredients/create"}>
+        <RecipeForm />
       </Route>
       <Route path="/categories/:categorySlug">
         <CategoryDetail />

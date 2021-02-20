@@ -17,11 +17,6 @@ const IngredientItem = (props) => {
       </Link>
       <p>{ingredient.name}</p>
       {/* <p>{ingredient.description}</p> */}
-      {/* <DeleteButton
-        ingredientId={ingredient.id}
-        deleteIngredient={props.deleteIngredient}
-      />
-      <UpdateButton ingredientSlug={ingredient.slug}>Update</UpdateButton> */}
     </IngredientWrapper>
   );
 };

@@ -1,7 +1,7 @@
 import { FETCH_RECIPE, CREATE_RECIPE } from "../actions/types";
 
 const initialState = {
-  recipe: [],
+  recipes: [],
   // loading: true,
 };
 

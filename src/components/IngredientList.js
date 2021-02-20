@@ -1,13 +1,13 @@
-import { useParams, Redirect, Link } from "react-router-dom";
 import { ListWrapper, Title } from "../styles";
 import IngredientItem from "./IngredientItem";
+import { useParams, Link } from "react-router-dom";
 import { AddButtonStyled } from "../styles";
-import AddButton from "./buttons/AddButton";
+import { Helmet } from "react-helmet";
 
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import CategoryList from "./CategoryList";
+import Loading from "./Loading";
 
 // import Loading from "./Loading";
 
@@ -19,17 +19,6 @@ const IngredientList = ({ categoryId }) => {
   const ingredients = useSelector(
     (state) => state.ingredientReducer.ingredients
   );
-
-  const categorySlug = useParams().categorySlug;
-  // const allIngredients = useSelector(
-  //   (state) => state.ingredientReducer.ingredients
-  // );
-
-  const category = useSelector((state) => {
-    return state.categoryReducer.categories.find(
-      (category) => category.slug === categorySlug
-    );
-  });
 
   const ingredientList = ingredients
     .filter((ingredient) => ingredient.categoryId === categoryId)

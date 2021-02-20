@@ -1,17 +1,24 @@
 import { useState } from "react";
-import { AddButtonStyled, UpdateButtonStyled } from "../styles";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  createIngredient,
-  updateIngredient,
-} from "../store/actions/ingredientActions";
+  AddButtonStyled,
+  UpdateButtonStyled,
+  FormStyled,
+  LabelStyled,
+  InputFieldStyled,
+  FieldSetStyled,
+  LegendStyled,
+  FormAddButtonStyled,
+} from "../styles";
+import { useDispatch, useSelector } from "react-redux";
+import { createIngredient } from "../store/actions/ingredientActions";
 import { useHistory, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const IngredientForm = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const { ingredientSlug, categoryId } = useParams();
+  const { categoryId } = useParams();
 
   const [ingredient, setIngredient] = useState({
     categoryId: categoryId,
@@ -41,40 +48,59 @@ const IngredientForm = () => {
 
     dispatch(createIngredient(ingredient));
     restForm();
-    history.push("/ingredients");
+    history.push("/categories");
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Create Ingredient</h1>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={ingredient.name}
-            onChange={handleChnage}
-          />
-        </label>
-        <label>
-          Description:
-          <input
-            type="text"
-            name="description"
-            value={ingredient.description}
-            onChange={handleChnage}
-          />
-        </label>
+    <>
+      <Helmet>
+        <title>Create an Ingredient</title>
+      </Helmet>
+      <FormStyled>
+        <form onSubmit={handleSubmit}>
+          <FieldSetStyled>
+            <LegendStyled>
+              <h2>Create Ingredient</h2>
+              <LabelStyled>
+                Name:
+                <InputFieldStyled
+                  type="text"
+                  name="name"
+                  value={ingredient.name}
+                  onChange={handleChnage}
+                />
+              </LabelStyled>
+              <LabelStyled>
+                Description:
+                <InputFieldStyled
+                  type="text"
+                  name="description"
+                  value={ingredient.description}
+                  onChange={handleChnage}
+                />
+              </LabelStyled>
 
-        <label>
-          Image:
-          <input type="file" name="image" alt="" onChange={handleImage} />
-        </label>
-
-        <AddButtonStyled type="submit">Submit Add Ingredient</AddButtonStyled>
-      </form>
-    </div>
+              <LabelStyled>
+                Image:
+                <InputFieldStyled
+                  type="file"
+                  name="image"
+                  alt=""
+                  onChange={handleImage}
+                />
+              </LabelStyled>
+              {/* onSubmit={handleSubmit}  was type sumbit*/}
+              {/* <FormAddButtonStyled onSubmit={handleSubmit}>
+                Submit Add Ingredient
+              </FormAddButtonStyled> */}
+              <FormAddButtonStyled onSubmit={handleSubmit}>
+                Submit Add Ingredient
+              </FormAddButtonStyled>
+            </LegendStyled>
+          </FieldSetStyled>
+        </form>
+      </FormStyled>
+    </>
   );
 };
 

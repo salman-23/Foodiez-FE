@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 // Components
-// import DeleteButton from "./buttons/DeleteButton";
-// import UpdateButton from "./buttons/UpdateButton";
+
 // Styling
 import { CategoryWrapper } from "../styles";
 

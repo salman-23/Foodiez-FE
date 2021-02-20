@@ -1,12 +1,28 @@
 // Styling
-import { SearchBarStyled } from "../styles";
+import {
+  SearchBarStyled,
+  SearchBarWrap,
+  SearchContainer,
+  SearchButton,
+} from "../styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBar = (props) => {
   return (
-    <SearchBarStyled
-      placeholder="Search for a ... "
-      onChange={(event) => props.setQuery(event.target.value)}
-    />
+    <>
+      <SearchBarWrap>
+        <SearchContainer>
+          <SearchBarStyled
+            placeholder="Search for a ... "
+            onChange={(event) => props.setQuery(event.target.value)}
+          />
+          <SearchButton type="submit">
+            <FontAwesomeIcon icon={faSearch} />
+          </SearchButton>
+        </SearchContainer>
+      </SearchBarWrap>
+    </>
   );
 };
 
